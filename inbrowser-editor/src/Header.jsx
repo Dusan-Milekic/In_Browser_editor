@@ -3,7 +3,13 @@ import save from "./assets/icon-save.svg";
 import document from "./assets/icon-document.svg";
 import trash from "./assets/icon-delete.svg";
 import { useState } from "react";
+import { GetSelectedItem, SelectItem, GetFiles } from "./Document";
+
 export default function Header() {
+  function SaveFile() {
+    console.log("SELEKTOVAN ITEM: ", SelectItem());
+    console.log("SVI ITEMI: ", GetFiles());
+  }
   function ActivationHandler() {
     const newState = !activate_burger;
     set_activate(newState);
@@ -50,7 +56,10 @@ export default function Header() {
           <div className="icon">
             <img src={trash} alt="trash" />
           </div>
-          <div className="bg-orange-500 text-lg  px-3 py-3 border-none cursor-pointer  rounded-sm flex items-center">
+          <div
+            className="bg-orange-500 text-lg  px-3 py-3 border-none cursor-pointer  rounded-sm flex items-center"
+            onClick={SaveFile}
+          >
             <img src={save} alt="save" />
             <p className=" pl-2 hidden sm:block">Save Changes</p>
           </div>
