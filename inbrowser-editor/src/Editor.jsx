@@ -9,7 +9,7 @@ export default function Editor() {
             <img src={eye_open} alt="show" className="w-8" />
           </div>
         </div>
-        <textarea name="edit" id="edit" className="w-full h-11/12"></textarea>
+        <textarea id="editor" name="edit" className="w-full h-11/12"></textarea>
       </div>
     </>
   );

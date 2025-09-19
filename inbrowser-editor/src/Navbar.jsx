@@ -1,7 +1,13 @@
-import Document, { all_files } from "./Document";
-
+import Document, { SortFilesDates } from "./Document";
+import All_Files from "./All_FilesVar";
 export default function Navbar() {
-  const last_file = all_files[0];
+  function LoadCode(id) {
+    let text_area = document.body.querySelector("#editor");
+    text_area.textContent = all_files
+      .filter((f) => f.name == id)
+      .map((f) => (f.content ? f.content : "No content"));
+  }
+  const all_files = SortFilesDates();
   return (
     <>
       <div className="navigation bg-black h-full">
@@ -15,25 +21,15 @@ export default function Navbar() {
           </div>
           <div className="body py-4">
             <div className="documents-seciton flex flex-col gap-5">
-              <div className="document  flex cursor-pointer  hover:opacity-50 transition-opacity">
-                <Document
-                  filename={last_file.name}
-                  extension={last_file.extension}
-                  date={last_file.createdAt}
-                ></Document>
-              </div>
-              {all_files
-                .filter((f) => f.name !== last_file.name)
-                .map((f) => (
-                  <div className="document flex cursor-pointer hover:opacity-50 transition-opacity">
-                    <Document
-                      key={f.name} // Dodajte key prop za React
-                      filename={f.name}
-                      extension={f.extension}
-                      date={f.createdAt}
-                    />
-                  </div>
-                ))}
+              {all_files.map((f) => (
+                <div
+                  id={f.name}
+                  className="document flex cursor-pointer hover:opacity-50 transition-opacity"
+                  onClick={(e) => LoadCode(e.currentTarget.id)}
+                >
+                  <Document key={f.name} filename={f.name} date={f.createdAt} />
+                </div>
+              ))}
             </div>
           </div>
         </nav>
