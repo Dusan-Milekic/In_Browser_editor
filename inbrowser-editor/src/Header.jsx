@@ -2,12 +2,40 @@ import menu from "./assets/icon-menu.svg";
 import save from "./assets/icon-save.svg";
 import document from "./assets/icon-document.svg";
 import trash from "./assets/icon-delete.svg";
+import { useState } from "react";
 export default function Header() {
+  function ActivationHandler() {
+    const newState = !activate_burger;
+    set_activate(newState);
+
+    // Koristi setTimeout da sačekaš da se DOM ažurira
+    setTimeout(() => {
+      const navigation = window.document.querySelector(".navigation-bar");
+      const header = window.document.querySelector(".all-content");
+      if (navigation) {
+        if (newState) {
+          navigation.style.transform = "TranslateX(-100%)";
+
+          header.classList.add("left-0");
+          header.classList.remove("left-64");
+        } else {
+          navigation.style.transform = "TranslateX(0%)";
+          header.classList.add("left-64");
+          header.classList.remove("left-0");
+        }
+      }
+    }, 0);
+  }
+
+  const [activate_burger, set_activate] = useState(false);
   return (
     <>
       <div className="bar flex justify-between h-20 items-center bg-gray-950">
         <div className="left flex items-center gap-2 h-full">
-          <div className="burger px-4 h-full flex items-center bg-gray-800">
+          <div
+            className="burger px-4 h-full flex items-center bg-gray-800 cursor-pointer"
+            onClick={ActivationHandler}
+          >
             <img src={menu} alt="menu" />
           </div>
           <div className="icon px-3">
