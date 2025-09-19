@@ -19,6 +19,7 @@ export function AddFiles(newFiles) {
 let item = 0;
 export function SelectItem(itemGet) {
   item = itemGet;
+  globalThis.vars = itemGet;
 }
 export function GetSelectedItem() {
   return item;

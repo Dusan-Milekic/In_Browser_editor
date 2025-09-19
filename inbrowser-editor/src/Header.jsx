@@ -6,10 +6,7 @@ import { useState } from "react";
 import { GetSelectedItem, SelectItem, GetFiles } from "./Document";
 
 export default function Header() {
-  function SaveFile() {
-    console.log("SELEKTOVAN ITEM: ", SelectItem());
-    console.log("SVI ITEMI: ", GetFiles());
-  }
+  function SaveFile() {}
   function ActivationHandler() {
     const newState = !activate_burger;
     set_activate(newState);
