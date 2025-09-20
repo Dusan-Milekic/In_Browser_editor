@@ -3,10 +3,33 @@ import save from "./assets/icon-save.svg";
 import document from "./assets/icon-document.svg";
 import trash from "./assets/icon-delete.svg";
 import { useState } from "react";
-import { GetSelectedItem, SelectItem, GetFiles } from "./Document";
 
 export default function Header() {
-  function SaveFile() {}
+  function SaveFile() {
+    let el = "#" + sessionStorage.getItem("selected").toString();
+    let eleemnt = window.document.body.querySelector(el);
+    let content = window.document.body.querySelector("#editor").value;
+
+    const name = eleemnt.querySelectorAll("p")[1].textContent;
+    const createAt = eleemnt.querySelectorAll("p")[0].textContent;
+    let newItemtoSave = {
+      createdAt: createAt,
+      name: name,
+      content: content,
+    };
+    console.log(content);
+    localStorage.removeItem("unnamed");
+    localStorage.setItem(newItemtoSave.name, JSON.stringify(newItemtoSave));
+  }
+  function RemoveFile() {
+    let el = "#" + sessionStorage.getItem("selected").toString();
+
+    let eleemnt = window.document.body.querySelector(el);
+    const name = eleemnt.querySelectorAll("p")[1].textContent;
+    localStorage.removeItem(name);
+    eleemnt.remove();
+  }
+
   function ActivationHandler() {
     const newState = !activate_burger;
     set_activate(newState);
@@ -50,7 +73,7 @@ export default function Header() {
           </div>
         </div>
         <div className="right flex items-center gap-4 mr-5">
-          <div className="icon">
+          <div className="icon cursor-pointer" onClick={RemoveFile}>
             <img src={trash} alt="trash" />
           </div>
           <div

@@ -1,21 +1,16 @@
 import { useState } from "react";
-import Document, {
-  SortFilesDates,
-  GetSelectedItem,
-  SelectItem,
-  AddFiles,
-} from "./Document";
+import Document, { SortFilesDates, AddFiles } from "./Document";
 
 import dayjs from "dayjs";
 
 export default function Navbar() {
   function LoadCode(id) {
-    SelectItem(id);
-    console.log(GetSelectedItem());
+    sessionStorage.setItem("selected", id);
     let text_area = document.body.querySelector("#editor");
-    text_area.textContent = all_files
-      .filter((f) => f.name == id)
-      .map((f) => (f.content ? f.content : "No content"));
+    text_area.value =
+      all_files
+        .filter((f) => f.name == id)
+        .map((f) => (f.content ? f.content : "No content"))[0] || "No content";
   }
   function CreateNewFile() {
     const newItem = {
@@ -23,8 +18,8 @@ export default function Navbar() {
       name: "unnamed",
       content: "",
     };
-
-    setFiles([newItem].concat(all_files));
+    AddFiles(newItem);
+    setFiles(SortFilesDates());
   }
   const [all_files, setFiles] = useState(SortFilesDates());
   return (

@@ -1,28 +1,26 @@
 import document from "./assets/icon-document.svg";
-import data from "./data.json";
 import dayjs from "dayjs";
 
+function LoadStorage() {
+  let fileLocalStorage = [];
+  for (let index = 0; index < localStorage.length; index++) {
+    const key = localStorage.key(index);
+    const value = JSON.parse(localStorage.getItem(key)); // ako si ranije setovao JSON
+    fileLocalStorage.push(value);
+  }
+  return fileLocalStorage;
+}
+
 let files;
+
 export function SortFilesDates() {
-  files = data.map((d) => d);
+  files = LoadStorage();
   files.sort((a, b) => dayjs(b.createdAt) - dayjs(a.createdAt));
   return files;
 }
 
-export function GetFiles() {
-  return files;
-}
-export function AddFiles(newFiles) {
-  files = newFiles;
-}
-
-let item = 0;
-export function SelectItem(itemGet) {
-  item = itemGet;
-  globalThis.vars = itemGet;
-}
-export function GetSelectedItem() {
-  return item;
+export function AddFiles(newFile) {
+  localStorage.setItem(newFile.name, JSON.stringify(newFile));
 }
 
 export default function Document({ filename, date, text }) {
@@ -42,4 +40,3 @@ export default function Document({ filename, date, text }) {
     </>
   );
 }
-SortFilesDates();
