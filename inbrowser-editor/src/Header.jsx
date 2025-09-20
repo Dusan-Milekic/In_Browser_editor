@@ -2,7 +2,7 @@ import menu from "./assets/icon-menu.svg";
 import save from "./assets/icon-save.svg";
 import document from "./assets/icon-document.svg";
 import trash from "./assets/icon-delete.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Header() {
   function SaveFile() {
@@ -73,7 +73,10 @@ export default function Header() {
           </div>
         </div>
         <div className="right flex items-center gap-4 mr-5">
-          <div className="icon cursor-pointer" onClick={RemoveFile}>
+          <div
+            className="icon cursor-pointer hover:animate-wiggle"
+            onClick={RemoveFile}
+          >
             <img src={trash} alt="trash" />
           </div>
           <div

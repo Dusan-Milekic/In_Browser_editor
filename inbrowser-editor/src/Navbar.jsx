@@ -41,7 +41,7 @@ export default function Navbar() {
               {all_files.map((f) => (
                 <div
                   id={f.name}
-                  className="document flex cursor-pointer hover:opacity-50 transition-opacity animate-fade-down"
+                  className="document flex cursor-pointer  animate-fade-down hover:opacity-50 transition-opacity"
                   onClick={(e) => LoadCode(e.currentTarget.id)}
                 >
                   <Document key={f.name} filename={f.name} date={f.createdAt} />

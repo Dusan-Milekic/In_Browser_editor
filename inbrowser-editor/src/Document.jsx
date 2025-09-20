@@ -30,7 +30,7 @@ export default function Document({ filename, date, text }) {
         <img src={document} alt="document" className="w-5" />
       </div>
 
-      <div className="text ">
+      <div className="text">
         <p className="opacity-50">{date}</p>
         <p contenteditable="true" spellCheck="false">
           {filename}
